@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import Div from '../../hoc/Div';
 import classes from './Layout.css';
-import Toolbar from '../Navigation/Toolbar/Toolbar';
-import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
 class Layout extends Component {
   state = {
@@ -11,17 +11,25 @@ class Layout extends Component {
   };
 
   sideDrawerOpenHandler = () => {
-    this.setState({ showSideDrawer: true});
+    this.setState({ showSideDrawer: true });
   };
 
   sideDrawerCloseHandler = () => {
-    this.setState({showSideDrawer: false});
+    this.setState({ showSideDrawer: false });
+  };
+
+  sideDrawerTogglerHandler = () => {
+    this.setState(prevState => {
+      return {
+        showSideDrawer: !prevState.showSideDrawer,
+      };
+    });
   };
 
   render() {
     return (
       <Div>
-        <Toolbar openSide={this.sideDrawerOpenHandler}/>
+        <Toolbar toggleSideDrawer={this.sideDrawerTogglerHandler} />
         <SideDrawer
           closed={this.sideDrawerCloseHandler}
           show={this.state.showSideDrawer}

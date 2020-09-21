@@ -9,7 +9,6 @@ const modal = props => {
     transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
     opacity: props.show ? '1' : '0',
   };
-  // return <Div classes={classes.Modal}>{props.children}</Div>;
   return (
     <Div>
       <BackDrop show={props.show} clicked={props.modalClosed} />
@@ -20,4 +19,4 @@ const modal = props => {
   );
 };
 
-export default modal;
+export default React.memo(modal);

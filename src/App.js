@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import classes from './App.css';
 
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-import Layout from './components/Layout/Layout';
+import Layout from './containers/Layout/Layout';
 
 class App extends Component {
   render() {
