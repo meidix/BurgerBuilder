@@ -13,7 +13,7 @@ const sideDrawer = props => {
 
   return (
     <Div>
-      <BackDrop show={props.show} clicked={props.closed} />
+      <BackDrop show={props.show} clicked={props.closed} classes={classes.DesktopOnly}/>
       <div className={attachedClasses.join(' ')}>
         <Logo height="11%" />
         <nav>

@@ -6,7 +6,7 @@ import BackDrop from '../../UI/BackDrop/BackDrop';
 
 const toolbar = props => (
   <header className={classes.Toolbar}>
-    <div>Menu</div>
+    <div onClick={props.openSide}>Menu</div>
     <Logo height="80%" />
     <nav className={classes.DesktopOnly}>
       <NavigationItems />
