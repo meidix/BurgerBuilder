@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Div from '../../hoc/Div';
-import classes from './Layout.css';
-import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
+import Div from "../../hoc/Div";
+import classes from "./Layout.css";
+import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
+import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 
 class Layout extends Component {
   state = {
@@ -19,7 +19,7 @@ class Layout extends Component {
   };
 
   sideDrawerTogglerHandler = () => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return {
         showSideDrawer: !prevState.showSideDrawer,
       };
@@ -28,14 +28,14 @@ class Layout extends Component {
 
   render() {
     return (
-      <Div>
+      <React.Fragment>
         <Toolbar toggleSideDrawer={this.sideDrawerTogglerHandler} />
         <SideDrawer
           closed={this.sideDrawerCloseHandler}
           show={this.state.showSideDrawer}
         />
         <main className={classes.Content}>{this.props.children}</main>
-      </Div>
+      </React.Fragment>
     );
   }
 }

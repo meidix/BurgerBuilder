@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import axios from '../../axios-orders';
-import Div from '../../hoc/Div';
-import Burger from '../../components/Burger/Burger';
-import BuildControls from '../../components/Burger/BuildControls/BuildControls';
-import Modal from '../../components/UI/Modal/Modal';
-import OrderSummary from '../../components/Burger/OrderSummery/OrderSummery';
-import Spinner from '../../components/UI/Spinner/Spinner';
-import withErrorHandler from '../../hoc/ErrorHadler/withErrorHandler';
+import React, { Component } from "react";
+import axios from "../../axios-orders";
+import Burger from "../../components/Burger/Burger";
+import BuildControls from "../../components/Burger/BuildControls/BuildControls";
+import Modal from "../../components/UI/Modal/Modal";
+import OrderSummary from "../../components/Burger/OrderSummery/OrderSummery";
+import Spinner from "../../components/UI/Spinner/Spinner";
+import withErrorHandler from "../../hoc/ErrorHadler/withErrorHandler";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -26,16 +25,16 @@ class BurgurBuilder extends Component {
 
   componentDidMount() {
     axios
-      .get('/ingredients.json')
-      .then(response => {
+      .get("/ingredients.json")
+      .then((response) => {
         this.setState({ ingredients: response.data });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
 
-  addIngredientHandler = type => {
+  addIngredientHandler = (type) => {
     const oldCount = this.state.ingredients[type];
     const updatedCount = oldCount + 1;
     const updatedIngredients = {
@@ -49,7 +48,7 @@ class BurgurBuilder extends Component {
     this.letPurchase(updatedIngredients);
   };
 
-  removeIngredientHandler = type => {
+  removeIngredientHandler = (type) => {
     const oldCount = this.state.ingredients[type];
     if (oldCount <= 0) return;
     const updatedCount = oldCount - 1;
@@ -64,9 +63,9 @@ class BurgurBuilder extends Component {
     this.letPurchase(updatedIngredients);
   };
 
-  letPurchase = ingredients => {
+  letPurchase = (ingredients) => {
     const ingredientCount = Object.keys(ingredients)
-      .map(igKey => {
+      .map((igKey) => {
         return ingredients[igKey];
       })
       .reduce((sum, el) => {
@@ -90,23 +89,24 @@ class BurgurBuilder extends Component {
       ingredients: this.state.ingredients,
       price: this.state.totalPrice,
       customer: {
-        name: 'Max Schawarsmuller',
+        name: "Max Schawarsmuller",
         address: {
-          street: 'somehere faar',
-          zipCode: '802385029402',
-          country: 'Iran',
+          street: "somehere faar",
+          zipCode: "802385029402",
+          country: "Iran",
         },
-        email: 'fuck@fuckyou.fuck',
+        email: "fuck@fuckyou.fuck",
       },
-      deliveryMethod: 'fastest',
+      deliveryMethod: "fastest",
     };
 
     axios
-      .post('/orders.json', order)
-      .then(response => {
+      .post("/orders.json", order)
+      .then((response) => {
         this.setState({ loading: false, purchasing: false });
+        this.props.history.push("/checkout");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         this.setState({ loading: false, purchasing: false });
       });
@@ -129,7 +129,7 @@ class BurgurBuilder extends Component {
     let burger = <Spinner />;
     if (this.state.ingredients) {
       burger = (
-        <Div>
+        <React.Fragment>
           <Burger ingredients={this.state.ingredients} />
           <BuildControls
             ingredientAdded={this.addIngredientHandler}
@@ -139,7 +139,7 @@ class BurgurBuilder extends Component {
             purchasable={this.state.purchasable}
             ordered={this.purchaseHandler}
           />
-        </Div>
+        </React.Fragment>
       );
 
       orderSummery = (
@@ -153,7 +153,7 @@ class BurgurBuilder extends Component {
     }
 
     return (
-      <Div>
+      <React.Fragment>
         <Modal
           show={this.state.purchasing}
           modalClosed={this.purchaseCancelhandler}
@@ -161,7 +161,7 @@ class BurgurBuilder extends Component {
           {orderSummery}
         </Modal>
         {burger}
-      </Div>
+      </React.Fragment>
     );
   }
 }

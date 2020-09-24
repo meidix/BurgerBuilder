@@ -1,18 +1,17 @@
-import React from 'react';
-import Button from '../../UI/Button/Button';
-import Div from '../../../hoc/Div';
+import React from "react";
+import Button from "../../UI/Button/Button";
 
-const orderSummary = props => {
-  const ingredientSummary = Object.keys(props.ingredients).map(igKey => {
+const orderSummary = (props) => {
+  const ingredientSummary = Object.keys(props.ingredients).map((igKey) => {
     return (
       <li key={igKey}>
-        <span style={{ textTransform: 'capitalize' }}>{igKey}</span>:{' '}
+        <span style={{ textTransform: "capitalize" }}>{igKey}</span>:{" "}
         {props.ingredients[igKey]}
       </li>
     );
   });
   return (
-    <Div>
+    <React.Fragment>
       <h3>Your Order</h3>
       <p>A delicious burger with the following ingredients:</p>
       <ul>{ingredientSummary}</ul>
@@ -26,7 +25,7 @@ const orderSummary = props => {
       <Button btnType="Success" clicked={props.purchasedContinued}>
         CONTINUE
       </Button>
-    </Div>
+    </React.Fragment>
   );
 };
 
