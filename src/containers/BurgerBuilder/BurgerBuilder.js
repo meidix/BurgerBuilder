@@ -122,10 +122,6 @@ class BurgurBuilder extends Component {
     }
 
     let orderSummery = null;
-    if (this.state.loading) {
-      orderSummery = <Spinner />;
-    }
-
     let burger = <Spinner />;
     if (this.state.ingredients) {
       burger = (
@@ -150,6 +146,10 @@ class BurgurBuilder extends Component {
           price={this.state.totalPrice.toFixed(2)}
         />
       );
+    }
+
+    if (this.state.loading) {
+      orderSummery = <Spinner />;
     }
 
     return (
