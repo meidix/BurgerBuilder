@@ -97,21 +97,22 @@ class ContactData extends Component {
       validation: validation,
       value: "",
       valid: false,
+      isTouched: false,
     };
   };
 
   validate = (value, rules) => {
     let isValid = true;
 
-    if (rules.required) {
+    if (rules && rules.required) {
       isValid = value.trim() !== "" && isValid;
     }
 
-    if (rules.minLength) {
+    if (rules && rules.minLength) {
       isValid = value.length >= rules.minLength && isValid;
     }
 
-    if (rules.maxLength) {
+    if (rules && rules.maxLength) {
       isValid = value.length <= rules.maxLength && isValid;
     }
 
@@ -155,6 +156,7 @@ class ContactData extends Component {
       updatedFormElement.validation
     );
     updatedFormElement.value = event.target.value;
+    updatedFormElement.isTouched = true;
     updatedOrderForm[inputIdentifier] = updatedFormElement;
     console.log(updatedFormElement);
     this.setState({ orderForm: updatedOrderForm });
@@ -171,6 +173,7 @@ class ContactData extends Component {
           invalid={!this.state.orderForm[element].valid}
           shouldValidate={this.state.orderForm[element].validation}
           inputChanged={(event) => this.inputChangedHandler(event, element)}
+          touched={this.state.orderForm[element].isTouched}
         />
       );
     });
