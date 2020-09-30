@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import classes from './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import classes from "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-import Layout from './containers/Layout/Layout';
-import Checkout from './containers/CheckOut/CheckOut';
-import Orders from './containers/Orders/Orders';
+import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
+import Layout from "./containers/Layout/Layout";
+import Checkout from "./containers/CheckOut/CheckOut";
+import Orders from "./containers/Orders/Orders";
 
 class App extends Component {
   render() {
