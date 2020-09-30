@@ -17,17 +17,6 @@ class BurgurBuilder extends Component {
     loading: false,
   };
 
-  componentDidMount() {
-    // axios
-    //   .get("/ingredients.json")
-    //   .then((response) => {
-    //     this.setState({ ingredients: response.data });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  }
-
   letPurchase = (ingredients) => {
     const ingredientCount = Object.keys(ingredients)
       .map((igKey) => {
@@ -49,21 +38,7 @@ class BurgurBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    const queryParams = [];
-    for (let i in this.state.ingredients) {
-      queryParams.push(
-        encodeURIComponent(i) +
-          "=" +
-          encodeURIComponent(this.state.ingredients[i])
-      );
-    }
-    queryParams.push("price=" + this.props.totalPrice);
-    const queryString = queryParams.join("&");
-
-    this.props.history.push({
-      pathname: "/checkout",
-      search: "?" + queryString,
-    });
+    this.props.history.push("/checkout");
   };
 
   render() {
@@ -97,7 +72,7 @@ class BurgurBuilder extends Component {
           ingredients={this.props.ings}
           purchaseCancelled={this.purchaseCancelhandler}
           purchasedContinued={this.purchaseContinueHandler}
-          price={this.props.totalPrice}
+          price={this.props.totalPrice.toFixed(2)}
         />
       );
     }
