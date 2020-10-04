@@ -21,6 +21,9 @@ const navigationItems = props => {
       >
         Orders
       </NavigationItem>
+      <NavigationItem link="/auth" active={props.location.pathname === '/auth'}>
+        Authenticate
+      </NavigationItem>
     </ul>
   );
 };
