@@ -1,4 +1,4 @@
-import * as types from "../actions";
+import * as types from "../actions/actionTypes";
 
 const initialState = {
   ingredients: {
@@ -8,6 +8,7 @@ const initialState = {
     meat: 0,
   },
   totalPrice: 4.0,
+  error: false,
 };
 
 const INGREDIENT_PRICES = {
@@ -36,6 +37,16 @@ const ingredientsReducer = (state = initialState, action) => {
           [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
         },
         totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+      };
+    case types.INIT_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: action.data,
+      };
+    case types.INGREDIENTS_ERROR:
+      return {
+        ...state,
+        error: true,
       };
     default:
       return state;

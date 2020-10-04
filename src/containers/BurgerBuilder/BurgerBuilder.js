@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as types from "../../store/actions";
+import * as types from "../../store/actions/actionTypes";
+import * as actions from "../../store/actions/BurgerBuilderActions";
 
 import axios from "../../axios-orders";
 import Burger from "../../components/Burger/Burger";
@@ -16,6 +17,10 @@ class BurgurBuilder extends Component {
     purchasing: false,
     loading: false,
   };
+
+  componentDidMount() {
+    this.props.initilizeIngredients();
+  }
 
   letPurchase = (ingredients) => {
     const ingredientCount = Object.keys(ingredients)
@@ -104,16 +109,13 @@ const mapStatetoProps = (state) => {
 
 const mapDispatchtoProps = (dispatch) => {
   return {
+    initilizeIngredients: () => {
+      dispatch(actions.initilizeIngredients());
+    },
     addIngredients: (ingredient) =>
-      dispatch({
-        type: types.ADD_INGREDIENTS,
-        ingredientName: ingredient,
-      }),
+      dispatch(actions.addIngredients(ingredient)),
     removeIngredient: (ingredient) =>
-      dispatch({
-        type: types.REMOVE_INGREDIENTS,
-        ingredientName: ingredient,
-      }),
+      dispatch(actions.removeIngredient(ingredient)),
   };
 };
 
